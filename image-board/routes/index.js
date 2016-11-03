@@ -47,7 +47,7 @@ router.post('/new-instance', function(req, res, next){
 	
 	var newImages = []; 
 	for(x = 1; x <= 3; x ++){
-		if(req.body['imageUrl'+x] !== undefined){
+		if(req.body['imageUrl'+x] !== undefined && req.body['imageUrl'+x] !== '' ){
 			var imageObj = {
 				caption: req.body['imageCaption'+x], 
 				url: req.body['imageUrl'+x]
@@ -89,22 +89,51 @@ router.get('/image-posts/:slug', function(req, res, next){
 	ImagePost.findOne({slug: req.params.slug}, function(err, imagepost, count){
 	
 		res.render('modify', {
-			imagepost: imagepost
+			imagepost: imagepost,
+			slug: slug
 		}); 
 		//res.send('image-post/'+slug); 
 		//res.send({imagepost: imagepost}); 
 
 	
-	}); 
+	}.bind(this)); 
 
 }); 
 var addedURL; 
 var addedCaption; 
+
 router.post('/modify', function(req, res, next){
-	
+console.log('IMGOORT'); 
+	console.log(req.body.slug); 
+	ImagePost.findOneAndUpdate({slug: req.body.slug}, 
+		{$push: {images: {url: req.body.newURL, caption: req.body.newCaption}}}, 
+		function(err, image, count){
+			// res.redirect('image-posts/:slug', {
+			// 	image: image
+			// });
+
+			res.redirect('/image-posts/' + req.body.slug)
+	}.bind(this)); 
 	
 }); 
 
+
+router.get('/modify', function(req, res, next){
+	var checkingPICS = req.body.check; 
+	console.log("CHECKING"); 
+	console.log(checkingPICS); 
+	ImagePost.findOneAndUpdate({slug: req.body.slug}, 
+		{$push: {images: {url: req.body.newURL, caption: req.body.newCaption}}}, 
+		function(err, image, count){
+			// res.redirect('image-posts/:slug', {
+			// 	image: image
+			// });
+
+			res.redirect('/image-posts/' + req.body.slug)
+	}.bind(this)); 
+
+
+}); 
 
 
 
