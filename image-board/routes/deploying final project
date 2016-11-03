@@ -1,0 +1,13 @@
+deploying final project 
+command line 
+- ssh hed248@i6.cims.nyu.edu 
+- ls 
+- mkdir opt //where application lives 
+ls 
+git clone http: 
+cd../
+mdir -p usr/local/lin
+# contain "global" modules
+mkdir -p var/log 
+ls
+mkdir -p data/db

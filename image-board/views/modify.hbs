@@ -1,0 +1,26 @@
+<h2> 480Chan - Image Board!</h2>
+
+
+
+{{#each imagepost}}
+	
+	<h3>Modify .....{{this.title}} </h3>
+	
+	
+	
+
+	{{#each images}}
+		
+		<img src = {{this.url}} alt = "some whale" style="width:128px;height:128px;"> 
+		<p> {{this.caption}} </p>
+		<br>
+	{{/each}}
+
+{{/each}}
+
+{{addedURL}} {{addedCaption}}
+<form method = "POST" action = ''> 
+url: <input type = 'text' name = 'newURL'> 
+caption: <input type = 'text' name = 'newCaption'> 
+<input type = 'submit' value = 'add'> 
+</form>

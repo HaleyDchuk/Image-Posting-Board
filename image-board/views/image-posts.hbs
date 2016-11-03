@@ -1,0 +1,40 @@
+<h2> 480Chan - Image Board!</h2>
+
+
+
+
+{{addedTitle}} {{image1URL}} {{image1Caption}} {{image2URL}} {{image2Caption}} {{image3URL}} {{image3Caption}}
+<form method = 'POST' action = '/new-instance'> 
+Image Post Title: <input type = 'text' name = 'imagePostTitle'> 
+<br> 
+Image 1 URL: <input type = 'text' name = 'imageUrl1'> 
+Image 1 Caption: <input type = 'text' name = 'imageCaption1'> 
+<br>
+Image 2 URL: <input type = 'text' name = 'imageUrl2'> 
+Image 2 Caption: <input type = 'text' name = 'imageCaption2'> 
+<br>
+Image 3 URL: <input type = 'text' name = 'imageUrl3'> 
+Image 3 Caption: <input type = 'text' name = 'imageCaption3'> 
+<br>
+<input type = 'submit' value = 'Add New Image Post'> 
+
+</form>
+
+
+ 
+
+{{#each imagepost}}
+	
+	<a href = '/image-posts/{{this.slug}}'><h3>{{this.title}} </h3></a>
+	<br> 
+	
+	
+
+	{{#each images}}
+		
+		<img src = {{this.url}} alt = "some whale" style="width:128px;height:128px;"> 
+		<p> {{this.caption}} </p>
+		<br>
+	{{/each}}
+
+{{/each}}
