@@ -137,13 +137,15 @@ router.get('/modify', function(req, res, next){
 	var thisObject = req.query.slug; 
 
 	ImagePost.findOne({id: req.query.check},
+		//not working to remove 
 		//{$pull: {images: {id: req.query.check}}}, 
 		function(err, imagepost, count){
+			//not working to remove 
 			//imagepost.id(req.query.check).remove(); 
 	
 		res.redirect('/image-posts/'+req.query.slug); 
 	}); 
-
+	
 		
 	// 	function(err, image, count){
 	// 		// res.redirect('image-posts/:slug', {
