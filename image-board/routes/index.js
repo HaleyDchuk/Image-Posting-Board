@@ -1,3 +1,7 @@
+//Author: Haley Danylchuk 
+
+
+
 var express = require('express');
 var app = express(); 
 var router = express.Router();
@@ -25,12 +29,15 @@ mongoose.model('ImagePost', ImagePost);
 router.get('/image-posts', function(req, res, next){
 	//list of everything in database 
 
-	ImagePost.find(function(err, imagepost, count){
+	ImagePost.find({images: {$not: {$size: 0}}}, function(err, imagepost, count){
 		console.log('all of the images'); 
 		console.log(imagepost); 
-		res.render('image-posts', {
+		if(imagepost.images !== ''){
+			res.render('image-posts', {
 			imagepost: imagepost
 		}); 
+		}
+		
 	}); 
 	
 
@@ -119,20 +126,33 @@ console.log('IMGOORT');
 
 
 router.get('/modify', function(req, res, next){
-	var checkingPICS = req.body.check; 
+	var checkingPICS = req.query.check; 
 	console.log("CHECKING"); 
+	
 	console.log(checkingPICS); 
-	ImagePost.findOneAndUpdate({slug: req.body.slug}, 
-		{$push: {images: {url: req.body.newURL, caption: req.body.newCaption}}}, 
-		function(err, image, count){
-			// res.redirect('image-posts/:slug', {
-			// 	image: image
-			// });
+	console.log("STILL SLUG"); 
+	
+	console.log(req.query.slug); 
+	//if(!Array.isArray(checkingPICS)){
+	var thisObject = req.query.slug; 
 
-			res.redirect('/image-posts/' + req.body.slug)
-	}.bind(this)); 
+	ImagePost.findOne({id: req.query.check},
+		//{$pull: {images: {id: req.query.check}}}, 
+		function(err, imagepost, count){
+			//imagepost.id(req.query.check).remove(); 
+	
+		res.redirect('/image-posts/'+req.query.slug); 
+	}); 
 
+		
+	// 	function(err, image, count){
+	// 		// res.redirect('image-posts/:slug', {
+	// 		// 	image: image
+	// 		// });
 
+	// 		res.redirect('/image-posts/' + req.query.slug)
+	// }); 
+//} 
 }); 
 
 

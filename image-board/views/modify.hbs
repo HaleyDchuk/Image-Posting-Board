@@ -2,21 +2,23 @@
 <h2> 480Chan - Image Board!</h2>
 
 
-
+<h3>Modify .....{{this.slug}} </h3>
 {{#each imagepost}}
 	
-	<h3>Modify .....{{this.title}} </h3>
+	<!-- <h3>Modify .....{{this.title}} </h3> -->
 	
 	
 	
 <form method = "GET" action = '/modify/'> 
 	{{#each images}}
-		<input type = "checkbox" name = "check" value = '{{this._id}}'>
-		<h1> ID </h1>
-		{{this.id}}
+		<input type = "checkbox" name = "check" value = '{{this.id}}'>
+		
 		<img src = {{this.url}} alt = "some whale" style="width:128px;height:128px;"> 
 		<p> {{this.caption}} </p>
 		<br>
+		<!-- this prints out the actual _ids for each picture, but I can't 
+		access it in my index.js in the router.get('/modify') handler
+		I just keep getting undefined  --> 
 		<!-- <h1> ID </h1>
 		{{this.id}} -->
 	{{/each}}
@@ -24,19 +26,20 @@
 {{/each}}
 
 {{addedURL}} {{addedCaption}} 
-
+<!-- 
 <b>THIS.SLUG: </b>
-{{this.slug}}
+{{this.slug}} -->
 
 
 
 
 
 <input type = "hidden" name = "slug" value = '{{this.slug}}'> 
-<input type = "submit"> 
+<input type = "submit" value = "DELETE"> 
+<br>
 </form>
 
-
+<br>
 <form method = "POST" action = '/modify/'> 
 url: <input type = 'text' name = 'newURL'> 
 caption: <input type = 'text' name = 'newCaption'> 
